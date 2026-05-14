@@ -7,27 +7,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Import Balsamiq Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        'balsamiq': ['"Balsamiq Sans"', 'cursive'],
-                    },
+                    fontFamily: { 'balsamiq': ['"Balsamiq Sans"', 'cursive'] },
                     colors: {
-                        'gg-bg': '#e1f5cd',
-                        'gg-header': '#cdefa3',
-                        'gg-orange': '#fea268',
-                        'gg-orange-light': '#ffd6b8',
-                        'gg-pink': '#ec4a74',
-                        'gg-pink-light': '#fac4d2',
-                        'gg-blue': '#82c5fa',
-                        'gg-blue-light': '#cbe4fc',
-                        'gg-green': '#a4e16d',
-                        'gg-green-light': '#e5f69c',
+                        'gg-bg': '#e1f5cd', 'gg-header': '#cdefa3',
+                        'gg-orange': '#fea268', 'gg-orange-light': '#ffd6b8',
+                        'gg-pink': '#ec4a74', 'gg-pink-light': '#fac4d2',
+                        'gg-blue': '#82c5fa', 'gg-blue-light': '#cbe4fc',
+                        'gg-green': '#a4e16d', 'gg-green-light': '#e5f69c',
                         'gg-term-bg': '#0f2c1b',
                     }
                 }
@@ -43,395 +35,574 @@
             font-family: 'Balsamiq Sans', cursive;
         }
         .blob-relay { border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; }
-        .blob-suhu { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
-        .floating { animation: floating 3s ease-in-out infinite; }
+        .blob-suhu  { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+        .floating         { animation: floating 3s   ease-in-out infinite; }
         .floating-delay-1 { animation: floating 3.5s ease-in-out infinite 0.5s; }
-        .floating-delay-2 { animation: floating 4s ease-in-out infinite 1s; }
+        .floating-delay-2 { animation: floating 4s   ease-in-out infinite 1s; }
         @keyframes floating {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            0%   { transform: translateY(0px)   rotate(0deg); }
+            50%  { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0px)   rotate(0deg); }
         }
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
-            background: #ffffff; cursor: pointer; margin-top: -6px; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            background: #fff; cursor: pointer; margin-top: -6px; box-shadow: 0 1px 3px rgba(0,0,0,.3);
         }
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 6px; cursor: pointer; background: rgba(255, 255, 255, 0.5); border-radius: 10px;
+            width: 100%; height: 6px; cursor: pointer;
+            background: rgba(255,255,255,.5); border-radius: 10px;
         }
-        /* Override font for terminal ONLY */
         .terminal-font {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace !important;
         }
+        .relay-on { box-shadow: 0 0 28px 8px rgba(39,201,63,.5) !important; }
     </style>
 </head>
 <body class="font-balsamiq text-gray-700 min-h-screen relative overflow-x-hidden pb-12">
 
-    <header class="bg-gg-header py-8 relative shadow-sm border-b-4 border-[#b9e380]">
-        <div class="absolute top-4 left-10 text-5xl floating">🍓</div>
-        <div class="absolute bottom-2 left-32 text-4xl floating-delay-1">🍊</div>
-        <div class="absolute top-6 right-32 text-5xl floating-delay-2">🍎</div>
-        <div class="absolute bottom-4 right-10 text-4xl floating">🦖</div>
+<!-- HEADER -->
+<header class="bg-gg-header py-8 relative shadow-sm border-b-4 border-[#b9e380]">
+    <div class="absolute top-4  left-10  text-5xl floating">🍓</div>
+    <div class="absolute bottom-2 left-32 text-4xl floating-delay-1">🍊</div>
+    <div class="absolute top-6  right-32 text-5xl floating-delay-2">🍎</div>
+    <div class="absolute bottom-4 right-10 text-4xl floating">🦖</div>
+    <div class="container mx-auto px-4 text-center relative z-10 flex flex-col items-center">
+        <img src="https://github.com/zanasya/gardengotchi/blob/main/Group%2021.png?raw=true"
+             alt="Garden Gotchi Logo" class="h-32 md:h-40 drop-shadow-lg">
+    </div>
+</header>
 
-        <div class="container mx-auto px-4 text-center relative z-10 flex flex-col items-center">
-            <img src="https://github.com/zanasya/gardengotchi/blob/main/Group%2021.png?raw=true" alt="Garden Gotchi Logo" class="h-32 md:h-40 drop-shadow-lg">
-        </div>
-    </header>
+<!-- MAIN -->
+<main class="container mx-auto px-4 max-w-5xl mt-8 space-y-6">
 
-    <main class="container mx-auto px-4 max-w-5xl mt-8 space-y-6">
+    <!-- Config Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <!-- Configuration Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-[2rem] p-6 shadow-sm border-2 border-orange-100 relative overflow-hidden">
-                <div class="flex items-center gap-2 mb-4">
-                    <i class="ph-fill ph-cloud text-gg-orange text-2xl"></i>
-                    <h2 class="text-xl text-gg-orange font-bold">Firebase Cloud Sync</h2>
-                </div>
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-bold text-orange-300 mb-1 ml-2">API Key</label>
-                        <input type="text" id="fb-apiKey" class="w-full bg-white border-2 border-orange-200 rounded-full px-4 py-2 outline-none focus:border-gg-orange transition" placeholder="Enter API Key...">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-orange-300 mb-1 ml-2">Database URL</label>
-                        <input type="text" id="fb-dbUrl" class="w-full bg-white border-2 border-orange-200 rounded-full px-4 py-2 outline-none focus:border-gg-orange transition" placeholder="Enter Database URL...">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-orange-300 mb-1 ml-2">Node Path</label>
-                        <input type="text" id="fb-path" class="w-full bg-white border-2 border-orange-200 rounded-full px-4 py-2 outline-none focus:border-gg-orange transition" placeholder="Enter Node Path...">
-                    </div>
-                    <button id="btn-connect-fb" class="w-full mt-4 bg-gg-orange hover:bg-[#eb8c50] text-white font-bold py-3 rounded-full shadow-md transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
-                        <i class="ph-bold ph-link"></i> Connect with Firebase
-                    </button>
-                </div>
+        <!-- Firebase -->
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border-2 border-orange-100">
+            <div class="flex items-center gap-2 mb-4">
+                <i class="ph-fill ph-cloud text-gg-orange text-2xl"></i>
+                <h2 class="text-xl text-gg-orange font-bold">Firebase Cloud Sync</h2>
             </div>
-
-            <div class="bg-white rounded-[2rem] p-6 shadow-sm border-2 border-pink-100">
-                <div class="flex items-center gap-2 mb-4">
-                    <i class="ph-bold ph-bluetooth text-gg-pink text-2xl"></i>
-                    <h2 class="text-xl text-gg-pink font-bold">Micro:bit Bluetooth</h2>
-                </div>
-                <p class="text-sm text-pink-400 font-bold mb-6">
-                    Ensure Micro:bit is powered on and the <strong class="text-gg-pink">Bluetooth UART</strong> extension is active in Makecode.
-                </p>
-                <div class="space-y-3">
-                    <button id="btn-connect-ble" class="w-full bg-gg-pink hover:bg-[#d63860] text-white font-bold py-3 rounded-full shadow-md transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
-                        <i class="ph-bold ph-bluetooth-connected"></i> Connect Micro:bit
-                    </button>
-                    <button id="btn-disconnect-ble" class="w-full bg-gray-300 text-gray-500 font-bold py-3 rounded-full flex items-center justify-center gap-2 transition hover:bg-gray-400">
-                        <i class="ph-bold ph-x"></i> Disconnect
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mode Selection -->
-        <div class="bg-[#ade882] rounded-[2rem] p-4 shadow-sm border-4 border-[#94d667] flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4 ml-2">
-                <i class="ph-fill ph-plant text-green-700 text-3xl"></i>
+            <div class="space-y-3">
                 <div>
-                    <h2 class="text-xl text-green-800 font-bold">System Mode</h2>
-                    <p class="text-xs text-green-700 font-bold opacity-80 leading-tight">
-                        Auto: Relay controlled by sensors.<br>
-                        Manual: Relay controlled by button below.
-                    </p>
+                    <label class="block text-xs font-bold text-orange-300 mb-1 ml-2">API Key</label>
+                    <input type="text" id="fb-apiKey" class="w-full bg-white border-2 border-orange-200 rounded-full px-4 py-2 outline-none focus:border-gg-orange transition" placeholder="Enter API Key...">
                 </div>
-            </div>
-            <div class="flex bg-[#9bd173] rounded-full p-1 border-2 border-[#8cc462]">
-                <button id="btn-auto" class="bg-[#c2f29b] text-green-800 font-bold py-2 px-6 rounded-full shadow-sm flex items-center gap-2 transition" onclick="setMode('auto')">
-                    <i class="ph-fill ph-robot"></i> Automatic
-                </button>
-                <button id="btn-manual" class="text-green-700 font-bold py-2 px-6 rounded-full hover:bg-[#a6db7b] flex items-center gap-2 transition" onclick="setMode('manual')">
-                    <i class="ph-fill ph-hand-palm"></i> Manual
-                </button>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-full py-2 px-6 shadow-sm inline-flex items-center gap-2 mb-2 w-full max-w-[300px]">
-            <i class="ph-bold ph-broadcast text-gg-pink animate-pulse"></i>
-            <h2 class="text-lg text-gg-pink font-bold">Live Sensor Data</h2>
-        </div>
-
-        <!-- Sensor Data Grid -->
-        <div class="relative bg-white/40 backdrop-blur-md rounded-[3rem] p-6 border border-white/60 shadow-sm">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center">
-                <div class="w-full space-y-8">
-                    <div class="bg-gg-blue-light border-4 border-gg-blue rounded-[2.5rem] p-5 shadow-sm relative overflow-hidden group hover:scale-[1.02] transition-transform">
-                        <h3 class="text-blue-600 font-bold flex items-center gap-2 mb-2 text-lg">
-                            Ultrasonic 1 - P0 / P1 <i class="ph-fill ph-drop text-blue-500"></i>
-                        </h3>
-                        <div class="flex items-end gap-3 mb-2">
-                            <div class="bg-white/60 text-blue-800 text-3xl font-bold py-2 px-4 rounded-2xl w-24 text-center">
-                                <span id="val-ultra1">--</span>
-                            </div>
-                            <span class="text-blue-600 font-bold mb-1">cm</span>
-                        </div>
-                        <p class="text-xs text-blue-500 font-bold mb-2">Pump turns on automatically if distance ≥ 30 cm.</p>
-                        <input type="range" id="range-ultra1" min="0" max="100" value="0" class="w-full mt-2" disabled>
-                    </div>
-
-                    <div class="flex justify-center gap-6 py-2">
-                        <div class="text-4xl floating">🍊</div>
-                        <div class="text-4xl floating-delay-1">🍎</div>
-                        <div class="text-4xl floating-delay-2">🦖</div>
-                    </div>
-
-                    <div class="bg-gg-green-light border-4 border-[#b9db42] rounded-[2.5rem] p-5 shadow-sm relative overflow-hidden group hover:scale-[1.02] transition-transform">
-                        <h3 class="text-lime-700 font-bold flex items-center gap-2 mb-2 text-lg">
-                            Ultrasonic 2 - P3 / P8 <i class="ph-fill ph-waves text-lime-600"></i>
-                        </h3>
-                        <div class="flex items-end gap-3 mb-2">
-                            <div class="bg-white/60 text-lime-800 text-3xl font-bold py-2 px-4 rounded-2xl w-24 text-center">
-                                <span id="val-ultra2">--</span>
-                            </div>
-                            <span class="text-lime-700 font-bold mb-1">cm</span>
-                        </div>
-                        <p class="text-xs text-lime-600 font-bold mb-2">Water level monitoring in the bucket.</p>
-                        <input type="range" id="range-ultra2" min="0" max="100" value="0" class="w-full mt-2" disabled>
-                    </div>
+                <div>
+                    <label class="block text-xs font-bold text-orange-300 mb-1 ml-2">Database URL</label>
+                    <input type="text" id="fb-dbUrl" class="w-full bg-white border-2 border-orange-200 rounded-full px-4 py-2 outline-none focus:border-gg-orange transition" placeholder="Enter Database URL...">
                 </div>
-
-                <div class="w-full flex flex-col items-center justify-center gap-8">
-                    <!-- Relay Blob -->
-                    <div class="bg-gg-pink-light border-[6px] border-gg-pink blob-relay w-64 h-56 flex flex-col items-center justify-center p-6 shadow-sm hover:scale-105 transition-transform duration-300">
-                        <h3 class="text-2xl text-gg-pink font-bold">Relay</h3>
-                        <i id="relay-icon" class="ph-fill ph-lightning text-yellow-400 text-5xl my-2 drop-shadow-md"></i>
-                        <p class="text-[10px] text-pink-500 font-bold text-center mb-3">Pin P13 - For Pump On/Off control</p>
-                        <button id="btn-relay" class="bg-gg-pink hover:bg-[#d63860] text-white font-bold py-2 px-8 rounded-full shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed" onclick="toggleRelay()">
-                            Off
-                        </button>
-                    </div>
-
-                    <!-- Temperature Blob -->
-                    <div class="bg-gg-orange-light border-[6px] border-gg-orange blob-suhu w-64 h-56 flex flex-col items-center justify-center p-6 shadow-sm hover:scale-105 transition-transform duration-300">
-                        <h3 class="text-2xl text-gg-orange font-bold">Temp</h3>
-                        <div class="my-3 bg-white/50 rounded-full p-2 border-2 border-orange-300 shadow-inner">
-                            <i class="ph-fill ph-thermometer text-orange-500 text-4xl"></i>
-                        </div>
-                        <div class="flex items-center gap-2 bg-white/60 py-1 px-4 rounded-xl border border-orange-200">
-                            <span id="val-suhu" class="text-orange-800 text-2xl font-bold">--</span>
-                            <span class="text-orange-600 font-bold text-lg">°C</span>
-                        </div>
-                    </div>
+                <div>
+                    <label class="block text-xs font-bold text-orange-300 mb-1 ml-2">Node Path</label>
+                    <input type="text" id="fb-path" class="w-full bg-white border-2 border-orange-200 rounded-full px-4 py-2 outline-none focus:border-gg-orange transition" placeholder="e.g. garden/kebun1">
                 </div>
-            </div>
-        </div>
-
-        <!-- Charts Row -->
-        <div class="bg-white rounded-full py-2 px-6 shadow-sm inline-flex items-center gap-2 mt-4 mb-2 w-full max-w-[300px]">
-            <i class="ph-bold ph-chart-line-up text-blue-400"></i>
-            <h2 class="text-lg text-blue-400 font-bold">History Charts</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 h-64 flex flex-col">
-                <div class="flex items-center gap-2 mb-4 text-gg-pink">
-                    <i class="ph-fill ph-ruler"></i>
-                    <h3 class="font-bold">Distance (CM)</h3>
-                </div>
-                <div class="flex-1 min-h-0">
-                    <canvas id="chart-jarak"></canvas>
-                </div>
-            </div>
-            <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 h-64 flex flex-col">
-                <div class="flex items-center gap-2 mb-4 text-gg-orange">
-                    <i class="ph-fill ph-sliders-horizontal"></i>
-                    <h3 class="font-bold">Manual Distance (CM)</h3>
-                </div>
-                <div class="flex-1 min-h-0">
-                    <canvas id="chart-jarak-manual"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Terminal Row -->
-        <div class="bg-gg-term-bg rounded-3xl p-4 shadow-lg border-2 border-[#1a4a2d] mt-8">
-            <div class="flex items-center justify-between mb-3 border-b border-[#1a4a2d] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                    <!-- Label terminal dalam huruf kecil -->
-                    <span class="ml-4 terminal-font text-xs text-[#ff5f56] font-bold tracking-wider lowercase">system_terminal - garden_gotchi</span>
-                </div>
-                <button id="btnClearLog" class="border border-[#ff5f56] text-[#ff5f56] hover:bg-[#ff5f56] hover:text-white transition rounded-full px-4 py-1 text-xs font-bold flex items-center gap-1">
-                    <i class="ph-bold ph-trash"></i> Clear
+                <button id="btn-connect-fb" class="w-full mt-4 bg-gg-orange hover:bg-[#eb8c50] text-white font-bold py-3 rounded-full shadow-md transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-link"></i> Connect with Firebase
                 </button>
             </div>
-            <div id="terminal-content" class="terminal-font bg-[#050f09] rounded-2xl h-48 p-4 text-[10px] sm:text-xs text-[#27c93f] overflow-y-auto">
-                <div class="opacity-70 lowercase">welcome to garden gotchi system terminal...</div>
-                <div class="opacity-70 lowercase">waiting for micro:bit connection...</div>
-            </div>
         </div>
 
-    </main>
+        <!-- Bluetooth -->
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border-2 border-pink-100">
+            <div class="flex items-center gap-2 mb-4">
+                <i class="ph-bold ph-bluetooth text-gg-pink text-2xl"></i>
+                <h2 class="text-xl text-gg-pink font-bold">Micro:bit Bluetooth</h2>
+            </div>
+            <p class="text-sm text-pink-400 font-bold mb-3">
+                Ensure Micro:bit is on and <strong class="text-gg-pink">Bluetooth UART</strong> is active in MakeCode.
+            </p>
+            <!-- Protocol reference -->
+            <div class="bg-pink-50 border border-pink-200 rounded-2xl px-4 py-3 mb-4 text-xs text-pink-600 font-bold space-y-1">
+                <div>📤 <span class="text-gray-500">Micro:bit → Web:</span> <code class="bg-white px-1 rounded">key:value\n</code></div>
+                <div>📥 <span class="text-gray-500">Web → Micro:bit:</span> <code class="bg-white px-1 rounded">key,value\n</code></div>
+                <div class="text-pink-400 pt-1">mode: <code>1</code>=auto · <code>0</code>=manual &nbsp;|&nbsp; relay: <code>1</code>=on · <code>0</code>=off</div>
+            </div>
+            <div class="space-y-3">
+                <button id="btn-connect-ble" class="w-full bg-gg-pink hover:bg-[#d63860] text-white font-bold py-3 rounded-full shadow-md transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-bluetooth-connected"></i> Connect Micro:bit
+                </button>
+                <button id="btn-disconnect-ble" class="w-full bg-gray-300 text-gray-500 font-bold py-3 rounded-full flex items-center justify-center gap-2 transition hover:bg-gray-400 hidden">
+                    <i class="ph-bold ph-x"></i> Disconnect
+                </button>
+            </div>
+            <div id="ble-status" class="mt-3 text-center text-xs font-bold text-gray-400">● Disconnected</div>
+        </div>
+    </div>
 
-    <script>
-        const $ = id => document.getElementById(id);
-        const UART_SERVICE_UUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-        const UART_TX_CHAR_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
-        const UART_RX_CHAR_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+    <!-- Mode Selection -->
+    <div class="bg-[#ade882] rounded-[2rem] p-4 shadow-sm border-4 border-[#94d667] flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4 ml-2">
+            <i class="ph-fill ph-plant text-green-700 text-3xl"></i>
+            <div>
+                <h2 class="text-xl text-green-800 font-bold">System Mode</h2>
+                <p class="text-xs text-green-700 font-bold opacity-80 leading-tight">
+                    Auto: Relay controlled by sensors.<br>
+                    Manual: Relay controlled by button below.
+                </p>
+            </div>
+        </div>
+        <div class="flex bg-[#9bd173] rounded-full p-1 border-2 border-[#8cc462]">
+            <button id="btn-auto" onclick="setMode('auto')"
+                class="bg-[#c2f29b] text-green-800 font-bold py-2 px-6 rounded-full shadow-sm flex items-center gap-2 transition">
+                <i class="ph-fill ph-robot"></i> Automatic
+            </button>
+            <button id="btn-manual" onclick="setMode('manual')"
+                class="text-green-700 font-bold py-2 px-6 rounded-full hover:bg-[#a6db7b] flex items-center gap-2 transition">
+                <i class="ph-fill ph-hand-palm"></i> Manual
+            </button>
+        </div>
+    </div>
 
-        let state = {
-            device: null,
-            rxChar: null,
-            mode: 'auto',
-            relay: false,
-            history: {
-                jarak: { labels: [], data: [] },
-                jarak_manual: { labels: [], data: [] }
-            },
-            charts: {}
-        };
+    <!-- Live Sensor label -->
+    <div class="bg-white rounded-full py-2 px-6 shadow-sm inline-flex items-center gap-2 w-full max-w-[300px]">
+        <i class="ph-bold ph-broadcast text-gg-pink animate-pulse"></i>
+        <h2 class="text-lg text-gg-pink font-bold">Live Sensor Data</h2>
+    </div>
 
-        const MAX_PTS = 20;
+    <!-- Sensor Grid -->
+    <div class="relative bg-white/40 backdrop-blur-md rounded-[3rem] p-6 border border-white/60 shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center">
 
-        async function connectBLE() {
-            try {
-                logTerminal("searching for micro:bit...");
-                state.device = await navigator.bluetooth.requestDevice({
-                    filters: [{ namePrefix: 'BBC micro:bit' }],
-                    optionalServices: [UART_SERVICE_UUID]
-                });
-                state.device.addEventListener('gattserverdisconnected', onDisconnected);
-                const server = await state.device.gatt.connect();
-                const service = await server.getPrimaryService(UART_SERVICE_UUID);
-                state.rxChar = await service.getCharacteristic(UART_RX_CHAR_UUID);
-                const txChar = await service.getCharacteristic(UART_TX_CHAR_UUID);
-                await txChar.startNotifications();
-                txChar.addEventListener('characteristicvaluechanged', (e) => {
-                    const val = new TextDecoder().decode(e.target.value);
-                    handleData(val);
-                });
-                logTerminal("micro:bit connected! ✅");
-                $('btn-connect-ble').classList.add('hidden');
-                $('btn-disconnect-ble').classList.remove('hidden');
-            } catch (err) { logTerminal("connection failed: " + err.message.toLowerCase()); }
-        }
+            <!-- Left: ultrasonics -->
+            <div class="w-full space-y-8">
+                <div class="bg-gg-blue-light border-4 border-gg-blue rounded-[2.5rem] p-5 shadow-sm group hover:scale-[1.02] transition-transform">
+                    <h3 class="text-blue-600 font-bold flex items-center gap-2 mb-2 text-lg">
+                        Ultrasonic 1 – P0 / P1 <i class="ph-fill ph-drop text-blue-500"></i>
+                    </h3>
+                    <div class="flex items-end gap-3 mb-2">
+                        <div class="bg-white/60 text-blue-800 text-3xl font-bold py-2 px-4 rounded-2xl w-24 text-center">
+                            <span id="val-ultra1">--</span>
+                        </div>
+                        <span class="text-blue-600 font-bold mb-1">cm</span>
+                    </div>
+                    <p class="text-xs text-blue-500 font-bold mb-2">Pump turns ON if distance ≥ 30 cm.</p>
+                    <input type="range" id="range-ultra1" min="0" max="100" value="0" class="w-full mt-2" disabled>
+                </div>
 
-        function onDisconnected() {
-            logTerminal("bluetooth connection lost.");
-            $('btn-connect-ble').classList.remove('hidden');
-            $('btn-disconnect-ble').classList.add('hidden');
-        }
+                <div class="flex justify-center gap-6 py-2">
+                    <div class="text-4xl floating">🍊</div>
+                    <div class="text-4xl floating-delay-1">🍎</div>
+                    <div class="text-4xl floating-delay-2">🦖</div>
+                </div>
 
-        async function sendBLE(msg) {
-            if (!state.rxChar) {
-                logTerminal("error: micro:bit not connected!");
-                return;
+                <div class="bg-gg-green-light border-4 border-[#b9db42] rounded-[2.5rem] p-5 shadow-sm group hover:scale-[1.02] transition-transform">
+                    <h3 class="text-lime-700 font-bold flex items-center gap-2 mb-2 text-lg">
+                        Ultrasonic 2 – P3 / P12 <i class="ph-fill ph-waves text-lime-600"></i>
+                    </h3>
+                    <div class="flex items-end gap-3 mb-2">
+                        <div class="bg-white/60 text-lime-800 text-3xl font-bold py-2 px-4 rounded-2xl w-24 text-center">
+                            <span id="val-ultra2">--</span>
+                        </div>
+                        <span class="text-lime-700 font-bold mb-1">cm</span>
+                    </div>
+                    <p class="text-xs text-lime-600 font-bold mb-2">Water level monitoring in the bucket.</p>
+                    <input type="range" id="range-ultra2" min="0" max="100" value="0" class="w-full mt-2" disabled>
+                </div>
+            </div>
+
+            <!-- Right: relay + temp -->
+            <div class="w-full flex flex-col items-center justify-center gap-8">
+
+                <!-- Relay Blob -->
+                <div id="relay-blob" class="bg-gg-pink-light border-[6px] border-gg-pink blob-relay w-64 h-56 flex flex-col items-center justify-center p-6 shadow-sm hover:scale-105 transition-all duration-300">
+                    <h3 class="text-2xl text-gg-pink font-bold">Relay</h3>
+                    <i id="relay-icon" class="ph-fill ph-lightning text-yellow-400 text-5xl my-2 drop-shadow-md"></i>
+                    <p class="text-[10px] text-pink-500 font-bold text-center mb-3">Pin P13 – Pump On/Off control</p>
+                    <button id="btn-relay"
+                        class="bg-gg-pink hover:bg-[#d63860] text-white font-bold py-2 px-8 rounded-full shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        onclick="toggleRelay()" disabled>
+                        Off
+                    </button>
+                </div>
+
+                <!-- Temp Blob -->
+                <div class="bg-gg-orange-light border-[6px] border-gg-orange blob-suhu w-64 h-56 flex flex-col items-center justify-center p-6 shadow-sm hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl text-gg-orange font-bold">Temp</h3>
+                    <div class="my-3 bg-white/50 rounded-full p-2 border-2 border-orange-300 shadow-inner">
+                        <i class="ph-fill ph-thermometer text-orange-500 text-4xl"></i>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white/60 py-1 px-4 rounded-xl border border-orange-200">
+                        <span id="val-suhu" class="text-orange-800 text-2xl font-bold">--</span>
+                        <span class="text-orange-600 font-bold text-lg">°C</span>
+                    </div>
+                    <p class="text-[10px] text-orange-400 font-bold text-center mt-2">DHT11 – Pin P8</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts label -->
+    <div class="bg-white rounded-full py-2 px-6 shadow-sm inline-flex items-center gap-2 w-full max-w-[300px]">
+        <i class="ph-bold ph-chart-line-up text-blue-400"></i>
+        <h2 class="text-lg text-blue-400 font-bold">History Charts</h2>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 h-64 flex flex-col">
+            <div class="flex items-center gap-2 mb-4 text-gg-pink">
+                <i class="ph-fill ph-ruler"></i>
+                <h3 class="font-bold">Ultrasonic 1 – Distance (cm)</h3>
+            </div>
+            <div class="flex-1 min-h-0"><canvas id="chart-jarak"></canvas></div>
+        </div>
+        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 h-64 flex flex-col">
+            <div class="flex items-center gap-2 mb-4 text-gg-orange">
+                <i class="ph-fill ph-sliders-horizontal"></i>
+                <h3 class="font-bold">Ultrasonic 2 – Bucket Level (cm)</h3>
+            </div>
+            <div class="flex-1 min-h-0"><canvas id="chart-jarak-manual"></canvas></div>
+        </div>
+    </div>
+
+    <!-- Terminal -->
+    <div class="bg-gg-term-bg rounded-3xl p-4 shadow-lg border-2 border-[#1a4a2d] mt-8">
+        <div class="flex items-center justify-between mb-3 border-b border-[#1a4a2d] pb-3">
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                <span class="ml-4 terminal-font text-xs text-[#ff5f56] font-bold tracking-wider lowercase">system_terminal – garden_gotchi</span>
+            </div>
+            <button id="btnClearLog" class="border border-[#ff5f56] text-[#ff5f56] hover:bg-[#ff5f56] hover:text-white transition rounded-full px-4 py-1 text-xs font-bold flex items-center gap-1">
+                <i class="ph-bold ph-trash"></i> Clear
+            </button>
+        </div>
+        <div id="terminal-content" class="terminal-font bg-[#050f09] rounded-2xl h-48 p-4 text-[10px] sm:text-xs text-[#27c93f] overflow-y-auto">
+            <div class="opacity-70">welcome to garden gotchi system terminal...</div>
+            <div class="opacity-70">waiting for micro:bit connection...</div>
+        </div>
+    </div>
+
+</main>
+
+<script type="module">
+import { initializeApp, getApps, deleteApp }      from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getDatabase, ref, onValue, update, set } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+
+// ── BLE UUIDs ──────────────────────────────────────────────────────────
+const SVC = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const TX  = '6e400002-b5a3-f393-e0a9-e50e24dcca9e'; // notif  micro:bit → web
+const RX  = '6e400003-b5a3-f393-e0a9-e50e24dcca9e'; // write  web → micro:bit
+
+// ── State ──────────────────────────────────────────────────────────────
+const S = {
+    device: null, rxChar: null, bleBuffer: '',
+    mode: 'auto',   // 'auto' | 'manual'
+    relay: false,
+    db: null, fbPath: '',
+    history: {
+        jarak:        { labels: [], data: [] },
+        jarak_manual: { labels: [], data: [] }
+    },
+    charts: {}
+};
+const MAX_PTS = 20;
+const $ = id => document.getElementById(id);
+
+// ──────────────────────────────────────────────────────────────────────
+// LOGGER
+// ──────────────────────────────────────────────────────────────────────
+function log(msg, color = '#27c93f') {
+    const term = $('terminal-content');
+    const line = document.createElement('div');
+    line.className  = 'opacity-90 py-0.5 terminal-font';
+    line.style.color = color;
+    line.textContent = `[${new Date().toLocaleTimeString()}] > ${msg}`;
+    term.appendChild(line);
+    term.scrollTop = term.scrollHeight;
+}
+
+// ──────────────────────────────────────────────────────────────────────
+// BLE CONNECT
+// ──────────────────────────────────────────────────────────────────────
+async function connectBLE() {
+    try {
+        log('searching for micro:bit...', '#ffbd2e');
+        S.device = await navigator.bluetooth.requestDevice({
+            filters: [{ namePrefix: 'BBC micro:bit' }],
+            optionalServices: [SVC]
+        });
+        S.device.addEventListener('gattserverdisconnected', onBLEDisconnect);
+        const server  = await S.device.gatt.connect();
+        const service = await server.getPrimaryService(SVC);
+        S.rxChar      = await service.getCharacteristic(RX);
+        const txChar  = await service.getCharacteristic(TX);
+        await txChar.startNotifications();
+        txChar.addEventListener('characteristicvaluechanged', onBLEData);
+        setBLEStatus(true);
+        log(`connected: ${S.device.name} ✅`, '#27c93f');
+    } catch (e) {
+        log('connection failed: ' + e.message.toLowerCase(), '#ff5f56');
+    }
+}
+
+function onBLEDisconnect() {
+    setBLEStatus(false);
+    log('bluetooth connection lost.', '#ff5f56');
+}
+
+function setBLEStatus(ok) {
+    $('btn-connect-ble').classList.toggle('hidden', ok);
+    $('btn-disconnect-ble').classList.toggle('hidden', !ok);
+    $('ble-status').textContent = ok ? '● Connected' : '● Disconnected';
+    $('ble-status').style.color = ok ? '#27c93f' : '#aaa';
+}
+
+// ──────────────────────────────────────────────────────────────────────
+// BLE RECEIVE  →  Micro:bit kirim  "key:value\n"
+// ──────────────────────────────────────────────────────────────────────
+function onBLEData(e) {
+    S.bleBuffer += new TextDecoder().decode(e.target.value);
+    const lines = S.bleBuffer.split('\n');
+    S.bleBuffer = lines.pop() ?? '';
+    lines.forEach(line => {
+        line = line.trim();
+        if (!line || !line.includes(':')) return;
+        const idx = line.indexOf(':');
+        const key = line.substring(0, idx).trim();
+        const val = line.substring(idx + 1).trim();
+        log(`rx ← ${key}:${val}`, '#a8ff78');
+        handleIncoming(key, val);
+    });
+}
+
+// ──────────────────────────────────────────────────────────────────────
+// HANDLE INCOMING DATA
+//
+// Keys yang dikirim Micro:bit (sesuai blok "call kirim" di MakeCode):
+//   suhu         → DHT11 temperature
+//   jarak        → ultrasonic 1 (P0/P1)
+//   jarak_manual → ultrasonic 2 (P3/P8)
+//   Relay        → status relay P13  (nilai: 0 atau 1)
+//   mode         → mode sistem        (1=otomatis, 0=manual)
+// ──────────────────────────────────────────────────────────────────────
+function handleIncoming(key, val) {
+    switch (key) {
+
+        case 'jarak':
+            $('val-ultra1').textContent = val;
+            $('range-ultra1').value = Math.min(parseFloat(val) || 0, 100);
+            pushHistory('jarak', val);
+            break;
+
+        case 'jarak_manual':
+            $('val-ultra2').textContent = val;
+            $('range-ultra2').value = Math.min(parseFloat(val) || 0, 100);
+            pushHistory('jarak_manual', val);
+            break;
+
+        case 'suhu':
+            $('val-suhu').textContent = val;
+            break;
+
+        case 'Relay':
+            // Micro:bit kirim status relay aktual setiap loop
+            // Ini sumber kebenaran — update UI sesuai nilai ini
+            applyRelayUI(val.trim() === '1');
+            break;
+
+        case 'mode':
+            // 1 = otomatis, 0 = manual  (sesuai konfirmasi)
+            applyModeUI(val.trim() === '1' ? 'auto' : 'manual');
+            break;
+    }
+
+    // Sync ke Firebase jika terhubung
+    if (S.db) {
+        update(ref(S.db, `${S.fbPath}/${key}`), { value: parseFloat(val) || 0 })
+            .catch(() => {});
+    }
+}
+
+// ──────────────────────────────────────────────────────────────────────
+// MODE
+// setMode dipanggil dari tombol HTML
+// Kirim ke Micro:bit: "mode,1\n" untuk auto, "mode,0\n" untuk manual
+// (MakeCode: set nama = read until "," → set angka = parse(read until \n)
+//            if nama == "mode" → set mode_otomatis = angka)
+// ──────────────────────────────────────────────────────────────────────
+window.setMode = function(mode) {
+    // Kirim dulu ke Micro:bit
+    // mode auto   → kirim mode,1  (mode_otomatis = 1 = otomatis)
+    // mode manual → kirim mode,0  (mode_otomatis = 0 = manual)
+    sendBLE('mode', mode === 'auto' ? 1 : 0);
+    log(`mode command → ${mode} (sent: mode,${mode === 'auto' ? 1 : 0})`, '#ffbd2e');
+
+    // Update UI langsung tanpa tunggu konfirmasi (lebih responsif)
+    applyModeUI(mode);
+
+    if (S.db) update(ref(S.db, `${S.fbPath}/mode`), { value: mode === 'auto' ? 1 : 0 }).catch(() => {});
+};
+
+function applyModeUI(mode) {
+    S.mode = mode;
+    const isAuto  = mode === 'auto';
+    const active  = 'bg-[#c2f29b] text-green-800 font-bold py-2 px-6 rounded-full shadow-sm flex items-center gap-2 transition';
+    const inactive = 'text-green-700 font-bold py-2 px-6 rounded-full hover:bg-[#a6db7b] flex items-center gap-2 transition';
+    $('btn-auto').className   = isAuto  ? active : inactive;
+    $('btn-manual').className = !isAuto ? active : inactive;
+    // Tombol relay hanya aktif di mode manual
+    $('btn-relay').disabled = isAuto;
+    log(`mode ui → ${mode}`, '#aaffaa');
+}
+
+// ──────────────────────────────────────────────────────────────────────
+// RELAY
+// toggleRelay dipanggil dari tombol HTML (hanya saat mode manual)
+// Kirim: "Relay,1\n" atau "Relay,0\n"
+// MakeCode cek: if nama == "Relay"  (huruf besar R, sesuai blok MakeCode)
+// ──────────────────────────────────────────────────────────────────────
+window.toggleRelay = function() {
+    if (S.mode === 'auto') {
+        log('cannot control relay in auto mode.', '#ff5f56');
+        return;
+    }
+    const next = !S.relay;
+
+    // Kirim perintah ke Micro:bit
+    // Key pakai "Relay" (huruf besar R) sesuai nama variabel di MakeCode
+    sendBLE('Relay', next ? 1 : 0);
+    log(`relay command → ${next ? 'on' : 'off'} (sent: Relay,${next ? 1 : 0})`, '#ffbd2e');
+
+    // Update UI langsung (optimistic update)
+    // Kalau Micro:bit kirim balik status Relay, UI akan update lagi via handleIncoming
+    applyRelayUI(next);
+
+    if (S.db) update(ref(S.db, `${S.fbPath}/Relay`), { value: next ? 1 : 0 }).catch(() => {});
+};
+
+function applyRelayUI(isOn) {
+    S.relay = isOn;
+    const btn  = $('btn-relay');
+    const icon = $('relay-icon');
+    const blob = $('relay-blob');
+
+    btn.textContent = isOn ? 'On' : 'Off';
+
+    if (isOn) {
+        btn.classList.remove('bg-gg-pink');
+        btn.classList.add('bg-green-500');
+        icon.classList.add('animate-pulse');
+        blob.classList.add('relay-on');
+    } else {
+        btn.classList.remove('bg-green-500');
+        btn.classList.add('bg-gg-pink');
+        icon.classList.remove('animate-pulse');
+        blob.classList.remove('relay-on');
+    }
+}
+
+// ──────────────────────────────────────────────────────────────────────
+// BLE SEND  →  Format: "key,value\n"
+// MakeCode: set nama  = bluetooth uart read until ","
+//           set angka = parse to number: bluetooth uart read until newline
+// ──────────────────────────────────────────────────────────────────────
+async function sendBLE(key, val) {
+    if (!S.rxChar) {
+        log('error: micro:bit not connected!', '#ff5f56');
+        return;
+    }
+    const payload = `${key},${val}\n`;
+    try {
+        await S.rxChar.writeValue(new TextEncoder().encode(payload));
+        log(`tx → ${key},${val}`, '#ffff66');
+    } catch (e) {
+        log('tx error: ' + e.message.toLowerCase(), '#ff5f56');
+    }
+}
+
+// ──────────────────────────────────────────────────────────────────────
+// CHARTS
+// ──────────────────────────────────────────────────────────────────────
+function initCharts() {
+    const cfg = color => ({
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                data: [], borderColor: color,
+                backgroundColor: color + '22',
+                fill: true, tension: 0.4, pointRadius: 0
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { display: false },
+                y: {
+                    grid: { color: '#f0f0f0' },
+                    ticks: { font: { size: 10, family: 'Balsamiq Sans' } }
+                }
             }
-            try { 
-                await state.rxChar.writeValue(new TextEncoder().encode(msg + "#")); 
-            }
-            catch (err) { console.error("BLE Send Failed:", err); }
         }
+    });
+    S.charts['jarak']        = new Chart($('chart-jarak'),        cfg('#ec4a74'));
+    S.charts['jarak_manual'] = new Chart($('chart-jarak-manual'), cfg('#fea268'));
+}
 
-        function handleData(data) {
-            const lines = data.trim().split('\n');
-            lines.forEach(line => {
-                if (!line.includes(':')) return;
-                const [key, val] = line.split(':');
-                updateUI(key, val);
-                updateHistory(key, val);
+function pushHistory(key, val) {
+    const h = S.history[key];
+    if (!h) return;
+    h.labels.push(new Date().toLocaleTimeString());
+    h.data.push(parseFloat(val) || 0);
+    if (h.labels.length > MAX_PTS) { h.labels.shift(); h.data.shift(); }
+    const ch = S.charts[key];
+    if (!ch) return;
+    ch.data.labels           = h.labels;
+    ch.data.datasets[0].data = h.data;
+    ch.update('none');
+}
+
+// ──────────────────────────────────────────────────────────────────────
+// FIREBASE
+// ──────────────────────────────────────────────────────────────────────
+async function connectFirebase() {
+    const apiKey = $('fb-apiKey').value.trim();
+    const dbUrl  = $('fb-dbUrl').value.trim();
+    const path   = $('fb-path').value.trim() || 'garden/kebun1';
+    if (!apiKey || !dbUrl) { alert('Isi API Key dan Database URL!'); return; }
+    try {
+        const apps = getApps();
+        if (apps.length) await deleteApp(apps[0]);
+        const app = initializeApp({
+            apiKey,
+            databaseURL: dbUrl,
+            projectId: dbUrl.replace('https://','').split('.')[0]
+        });
+        S.db     = getDatabase(app);
+        S.fbPath = path;
+        log(`firebase connected → /${path}`, '#27c93f');
+        onValue(ref(S.db, path), snap => {
+            const d = snap.val();
+            if (!d) return;
+            ['suhu','jarak','jarak_manual','Relay','mode'].forEach(k => {
+                if (d[k] !== undefined) {
+                    handleIncoming(k, String(d[k]?.value ?? d[k]));
+                }
             });
-        }
+        }, err => log('firebase error: ' + err.message, '#ff5f56'));
+    } catch (e) {
+        log('firebase error: ' + e.message, '#ff5f56');
+    }
+}
 
-        function updateUI(key, val) {
-            if (key === 'U1') { $('val-ultra1').textContent = val; $('range-ultra1').value = val; }
-            else if (key === 'U2') { $('val-ultra2').textContent = val; $('range-ultra2').value = val; }
-            else if (key === 'T') { $('val-suhu').textContent = val; }
-            else if (key === 'R') {
-                const isOn = val === '1';
-                const btn = $('btn-relay');
-                const icon = $('relay-icon');
-                state.relay = isOn;
-                btn.textContent = isOn ? 'On' : 'Off';
-                if (!isOn) { 
-                    btn.classList.add('bg-gg-pink'); btn.classList.remove('bg-green-500'); icon.classList.remove('animate-pulse'); 
-                }
-                else { 
-                    btn.classList.remove('bg-gg-pink'); btn.classList.add('bg-green-500'); icon.classList.add('animate-pulse'); 
-                }
-            } else if (key === 'M') { 
-                applyModeState(val === '1' ? 'manual' : 'auto'); 
-            }
-        }
+// ──────────────────────────────────────────────────────────────────────
+// EVENT LISTENERS & INIT
+// ──────────────────────────────────────────────────────────────────────
+$('btn-connect-ble').onclick    = connectBLE;
+$('btn-disconnect-ble').onclick = () => { if (S.device) S.device.gatt.disconnect(); };
+$('btn-connect-fb').onclick     = connectFirebase;
+$('btnClearLog').onclick        = () => { $('terminal-content').innerHTML = ''; };
 
-        function setMode(mode) {
-            state.mode = mode;
-            applyModeState(mode);
-            sendBLE(mode === 'manual' ? 'MODE:1' : 'MODE:0');
-            logTerminal(`system mode: ${mode.toLowerCase()}`);
-        }
-
-        function applyModeState(mode) {
-            const btnAuto = $('btn-auto');
-            const btnManual = $('btn-manual');
-            const btnRelay = $('btn-relay');
-            if (mode === 'auto') {
-                btnAuto.className = "bg-[#c2f29b] text-green-800 font-bold py-2 px-6 rounded-full shadow-sm flex items-center gap-2 transition";
-                btnManual.className = "text-green-700 font-bold py-2 px-6 rounded-full hover:bg-[#a6db7b] flex items-center gap-2 transition";
-                btnRelay.disabled = true;
-            } else {
-                btnManual.className = "bg-[#c2f29b] text-green-800 font-bold py-2 px-6 rounded-full shadow-sm flex items-center gap-2 transition";
-                btnAuto.className = "text-green-700 font-bold py-2 px-6 rounded-full hover:bg-[#a6db7b] flex items-center gap-2 transition";
-                btnRelay.disabled = false;
-            }
-        }
-
-        function toggleRelay() {
-            if (state.mode === 'auto') {
-                logTerminal("switch to manual mode to control relay.");
-                return;
-            }
-            const nextState = !state.relay;
-            sendBLE(nextState ? 'RELAY:1' : 'RELAY:0');
-            logTerminal(`manual relay command: ${nextState ? 'on' : 'off'}`);
-        }
-
-        function initCharts() {
-            const cfg = (color) => ({
-                type: 'line',
-                data: { labels: [], datasets: [{ data: [], borderColor: color, backgroundColor: color + '22', fill: true, tension: 0.4 }] },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { legend: { display: false } },
-                    scales: { x: { display: false }, y: { grid: { color: '#f0f0f0' }, ticks: { font: { size: 10, family: 'Balsamiq Sans' } } } } 
-                }
-            });
-            state.charts['chart-jarak'] = new Chart($('chart-jarak'), cfg('#ec4a74'));
-            state.charts['chart-jarak-manual'] = new Chart($('chart-jarak-manual'), cfg('#fea268'));
-        }
-
-        function updateHistory(key, val) {
-            let histKey = (key === 'U1') ? 'jarak' : (key === 'U2') ? 'jarak_manual' : null;
-            if (!histKey) return;
-            const h = state.history[histKey];
-            h.labels.push(new Date().toLocaleTimeString());
-            h.data.push(parseFloat(val));
-            if (h.labels.length > MAX_PTS) { h.labels.shift(); h.data.shift(); }
-            const chart = state.charts[`chart-${histKey.replace('_', '-')}`];
-            chart.data.labels = h.labels; chart.data.datasets[0].data = h.data; chart.update('none');
-        }
-
-        function logTerminal(msg) {
-            const term = $('terminal-content');
-            const line = document.createElement('div');
-            line.className = "opacity-90 py-0.5 lowercase";
-            line.textContent = `[${new Date().toLocaleTimeString()}] > ${msg}`;
-            term.appendChild(line); term.scrollTop = term.scrollHeight;
-        }
-
-        $('btn-connect-ble').onclick = connectBLE;
-        $('btn-disconnect-ble').onclick = () => { if (state.device) state.device.gatt.disconnect(); };
-        $('btnClearLog').onclick = () => $('terminal-content').innerHTML = '';
-
-        window.onload = () => {
-            initCharts();
-            applyModeState('auto');
-        };
-    </script>
+window.onload = () => {
+    initCharts();
+    applyModeUI('auto');  // default: auto
+    log('garden gotchi ready — connect firebase & micro:bit 🌱');
+};
+</script>
 </body>
 </html>
