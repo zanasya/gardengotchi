@@ -61,7 +61,6 @@
 </head>
 <body class="font-balsamiq text-gray-700 min-h-screen relative overflow-x-hidden pb-12">
 
-<!-- HEADER -->
 <header class="bg-gg-header py-8 relative shadow-sm border-b-4 border-[#b9e380]">
     <div class="absolute top-4  left-10  text-5xl floating">🍓</div>
     <div class="absolute bottom-2 left-32 text-4xl floating-delay-1">🍊</div>
@@ -73,13 +72,10 @@
     </div>
 </header>
 
-<!-- MAIN -->
 <main class="container mx-auto px-4 max-w-5xl mt-8 space-y-6">
 
-    <!-- Config Row -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <!-- Firebase -->
         <div class="bg-white rounded-[2rem] p-6 shadow-sm border-2 border-orange-100">
             <div class="flex items-center gap-2 mb-4">
                 <i class="ph-fill ph-cloud text-gg-orange text-2xl"></i>
@@ -104,7 +100,6 @@
             </div>
         </div>
 
-        <!-- Bluetooth -->
         <div class="bg-white rounded-[2rem] p-6 shadow-sm border-2 border-pink-100">
             <div class="flex items-center gap-2 mb-4">
                 <i class="ph-bold ph-bluetooth text-gg-pink text-2xl"></i>
@@ -113,7 +108,6 @@
             <p class="text-sm text-pink-400 font-bold mb-3">
                 Ensure Micro:bit is on and <strong class="text-gg-pink">Bluetooth UART</strong> is active in MakeCode.
             </p>
-            <!-- Protocol reference -->
             <div class="bg-pink-50 border border-pink-200 rounded-2xl px-4 py-3 mb-4 text-xs text-pink-600 font-bold space-y-1">
                 <div>📤 <span class="text-gray-500">Micro:bit → Web:</span> <code class="bg-white px-1 rounded">key:value\n</code></div>
                 <div>📥 <span class="text-gray-500">Web → Micro:bit:</span> <code class="bg-white px-1 rounded">key,value\n</code></div>
@@ -131,7 +125,6 @@
         </div>
     </div>
 
-    <!-- Mode Selection -->
     <div class="bg-[#ade882] rounded-[2rem] p-4 shadow-sm border-4 border-[#94d667] flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-4 ml-2">
             <i class="ph-fill ph-plant text-green-700 text-3xl"></i>
@@ -155,18 +148,15 @@
         </div>
     </div>
 
-    <!-- Live Sensor label -->
     <div class="bg-white rounded-full py-2 px-6 shadow-sm inline-flex items-center gap-2 w-full max-w-[300px]">
         <i class="ph-bold ph-broadcast text-gg-pink animate-pulse"></i>
         <h2 class="text-lg text-gg-pink font-bold">Live Sensor Data</h2>
     </div>
 
-    <!-- Sensor Grid -->
     <div class="relative bg-white/40 backdrop-blur-md rounded-[3rem] p-6 border border-white/60 shadow-sm">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center">
 
-            <!-- Left: ultrasonics -->
-            <div class="w-full space-y-8">
+            <div class="w-full space-y-8 flex flex-col h-full">
                 <div class="bg-gg-blue-light border-4 border-gg-blue rounded-[2.5rem] p-5 shadow-sm group hover:scale-[1.02] transition-transform">
                     <h3 class="text-blue-600 font-bold flex items-center gap-2 mb-2 text-lg">
                         Ultrasonic 1 – P0 / P1 <i class="ph-fill ph-drop text-blue-500"></i>
@@ -181,31 +171,15 @@
                     <input type="range" id="range-ultra1" min="0" max="100" value="0" class="w-full mt-2" disabled>
                 </div>
 
-                <div class="flex justify-center gap-6 py-2">
+                <div class="flex justify-center gap-6 py-2 mt-auto">
                     <div class="text-4xl floating">🍊</div>
                     <div class="text-4xl floating-delay-1">🍎</div>
                     <div class="text-4xl floating-delay-2">🦖</div>
                 </div>
-
-                <div class="bg-gg-green-light border-4 border-[#b9db42] rounded-[2.5rem] p-5 shadow-sm group hover:scale-[1.02] transition-transform">
-                    <h3 class="text-lime-700 font-bold flex items-center gap-2 mb-2 text-lg">
-                        Ultrasonic 2 – P3 / P12 <i class="ph-fill ph-waves text-lime-600"></i>
-                    </h3>
-                    <div class="flex items-end gap-3 mb-2">
-                        <div class="bg-white/60 text-lime-800 text-3xl font-bold py-2 px-4 rounded-2xl w-24 text-center">
-                            <span id="val-ultra2">--</span>
-                        </div>
-                        <span class="text-lime-700 font-bold mb-1">cm</span>
-                    </div>
-                    <p class="text-xs text-lime-600 font-bold mb-2">Water level monitoring in the bucket.</p>
-                    <input type="range" id="range-ultra2" min="0" max="100" value="0" class="w-full mt-2" disabled>
-                </div>
             </div>
 
-            <!-- Right: relay + temp -->
             <div class="w-full flex flex-col items-center justify-center gap-8">
 
-                <!-- Relay Blob -->
                 <div id="relay-blob" class="bg-gg-pink-light border-[6px] border-gg-pink blob-relay w-64 h-56 flex flex-col items-center justify-center p-6 shadow-sm hover:scale-105 transition-all duration-300">
                     <h3 class="text-2xl text-gg-pink font-bold">Relay</h3>
                     <i id="relay-icon" class="ph-fill ph-lightning text-yellow-400 text-5xl my-2 drop-shadow-md"></i>
@@ -217,7 +191,6 @@
                     </button>
                 </div>
 
-                <!-- Temp Blob -->
                 <div class="bg-gg-orange-light border-[6px] border-gg-orange blob-suhu w-64 h-56 flex flex-col items-center justify-center p-6 shadow-sm hover:scale-105 transition-transform duration-300">
                     <h3 class="text-2xl text-gg-orange font-bold">Temp</h3>
                     <div class="my-3 bg-white/50 rounded-full p-2 border-2 border-orange-300 shadow-inner">
@@ -233,14 +206,12 @@
         </div>
     </div>
 
-    <!-- Charts label -->
     <div class="bg-white rounded-full py-2 px-6 shadow-sm inline-flex items-center gap-2 w-full max-w-[300px]">
         <i class="ph-bold ph-chart-line-up text-blue-400"></i>
         <h2 class="text-lg text-blue-400 font-bold">History Charts</h2>
     </div>
 
-    <!-- Charts -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 gap-6">
         <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 h-64 flex flex-col">
             <div class="flex items-center gap-2 mb-4 text-gg-pink">
                 <i class="ph-fill ph-ruler"></i>
@@ -248,16 +219,8 @@
             </div>
             <div class="flex-1 min-h-0"><canvas id="chart-jarak"></canvas></div>
         </div>
-        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 h-64 flex flex-col">
-            <div class="flex items-center gap-2 mb-4 text-gg-orange">
-                <i class="ph-fill ph-sliders-horizontal"></i>
-                <h3 class="font-bold">Ultrasonic 2 – Bucket Level (cm)</h3>
-            </div>
-            <div class="flex-1 min-h-0"><canvas id="chart-jarak-manual"></canvas></div>
-        </div>
     </div>
 
-    <!-- Terminal -->
     <div class="bg-gg-term-bg rounded-3xl p-4 shadow-lg border-2 border-[#1a4a2d] mt-8">
         <div class="flex items-center justify-between mb-3 border-b border-[#1a4a2d] pb-3">
             <div class="flex items-center gap-2">
@@ -294,8 +257,7 @@ const S = {
     relay: false,
     db: null, fbPath: '',
     history: {
-        jarak:        { labels: [], data: [] },
-        jarak_manual: { labels: [], data: [] }
+        jarak: { labels: [], data: [] }
     },
     charts: {}
 };
@@ -375,7 +337,6 @@ function onBLEData(e) {
 // Keys yang dikirim Micro:bit (sesuai blok "call kirim" di MakeCode):
 //   suhu         → DHT11 temperature
 //   jarak        → ultrasonic 1 (P0/P1)
-//   jarak_manual → ultrasonic 2 (P3/P8)
 //   Relay        → status relay P13  (nilai: 0 atau 1)
 //   mode         → mode sistem        (1=otomatis, 0=manual)
 // ──────────────────────────────────────────────────────────────────────
@@ -386,12 +347,6 @@ function handleIncoming(key, val) {
             $('val-ultra1').textContent = val;
             $('range-ultra1').value = Math.min(parseFloat(val) || 0, 100);
             pushHistory('jarak', val);
-            break;
-
-        case 'jarak_manual':
-            $('val-ultra2').textContent = val;
-            $('range-ultra2').value = Math.min(parseFloat(val) || 0, 100);
-            pushHistory('jarak_manual', val);
             break;
 
         case 'suhu':
@@ -540,8 +495,7 @@ function initCharts() {
             }
         }
     });
-    S.charts['jarak']        = new Chart($('chart-jarak'),        cfg('#ec4a74'));
-    S.charts['jarak_manual'] = new Chart($('chart-jarak-manual'), cfg('#fea268'));
+    S.charts['jarak'] = new Chart($('chart-jarak'), cfg('#ec4a74'));
 }
 
 function pushHistory(key, val) {
@@ -579,7 +533,7 @@ async function connectFirebase() {
         onValue(ref(S.db, path), snap => {
             const d = snap.val();
             if (!d) return;
-            ['suhu','jarak','jarak_manual','Relay','mode'].forEach(k => {
+            ['suhu','jarak','Relay','mode'].forEach(k => {
                 if (d[k] !== undefined) {
                     handleIncoming(k, String(d[k]?.value ?? d[k]));
                 }
